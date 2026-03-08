@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Movie Sentiment Analyzer</title>
+
+<style>
+
+body{
+    margin:0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: linear-gradient(135deg,#1f4037,#99f2c8);
+    height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.container{
+    background:white;
+    padding:40px;
+    border-radius:12px;
+    width:500px;
+    box-shadow:0px 10px 30px rgba(0,0,0,0.2);
+    text-align:center;
+}
+
+h1{
+    margin-bottom:10px;
+    color:#333;
+}
+
+.subtitle{
+    color:#666;
+    margin-bottom:30px;
+}
+
+textarea{
+    width:100%;
+    height:140px;
+    border-radius:8px;
+    border:1px solid #ccc;
+    padding:10px;
+    font-size:14px;
+    resize:none;
+}
+
+textarea:focus{
+    outline:none;
+    border:1px solid #1f4037;
+}
+
+button{
+    margin-top:20px;
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:8px;
+    background:#1f4037;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+button:hover{
+    background:#145a50;
+}
+
+.result{
+    margin-top:25px;
+    padding:15px;
+    border-radius:8px;
+    font-size:18px;
+    font-weight:bold;
+}
+
+.positive{
+    background:#d4edda;
+    color:#155724;
+}
+
+.negative{
+    background:#f8d7da;
+    color:#721c24;
+}
+
+.footer{
+    margin-top:20px;
+    font-size:12px;
+    color:#999;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>🎬 Movie Sentiment Analyzer</h1>
+<p class="subtitle">Enter a movie review and discover its sentiment.</p>
+
+<form action="/predict" method="post">
+
+<textarea name="review">{{ review if review else '' }}</textarea>    
+
+<button type="submit">Analyze Sentiment</button>
+
+</form>
+
+{% if result %}
+
+<div class="result {% if result == 'Positive' %}positive{% else %}negative{% endif %}">
+Sentiment: {{ result }}
+</div>
+
+{% endif %}
+
+<div class="footer">
+Powered by Word2Vec + TF-IDF + Logistic Regression
+</div>
+
+</div>
+
+</body>
+</html>
